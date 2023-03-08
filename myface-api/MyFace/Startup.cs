@@ -23,6 +23,7 @@ namespace MyFace
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<MyFaceDbContext>(options =>
             {
                 options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
