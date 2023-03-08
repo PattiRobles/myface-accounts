@@ -4,3 +4,5 @@ bin/
 obj/ 
 myface.db
 myface.db-*
+
+.fake
