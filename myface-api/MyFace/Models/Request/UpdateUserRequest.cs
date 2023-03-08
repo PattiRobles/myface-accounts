@@ -8,5 +8,7 @@
         public string Email { get; set; }
         public string ProfileImageUrl { get; set; }
         public string CoverImageUrl { get; set; }
+        public string Hashed_password {get; set;}
+        public string Salt {get; set;}
     }
 }
