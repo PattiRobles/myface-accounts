@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using System;
+using System.Text;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MyFace.Models.Request;
 using MyFace.Models.Response;
 using MyFace.Repositories;
+
 
 namespace MyFace.Controllers
 {
@@ -23,10 +28,14 @@ namespace MyFace.Controllers
             var userCount = _users.Count(searchRequest);
             return UserListResponse.Create(searchRequest, users, userCount);
         }
-
         [HttpGet("{id}")]
         public ActionResult<UserResponse> GetById([FromRoute] int id)
         {
+            string authHeader = HttpContext.Request.Headers["Authorization"];
+            if(!_users.HasAccess(authHeader))
+            {
+                return Unauthorized();
+            }
             var user = _users.GetById(id);
             return new UserResponse(user);
         }
